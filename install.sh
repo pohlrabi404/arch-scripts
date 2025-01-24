@@ -9,7 +9,7 @@ umount -R /mnt 2>/dev/null || true
 swapoff "${DISK}${PART}2" 2>/dev/null || true
 
 # wipe partitions
-wifefs --all --force "$DISK"
+wipefs --all --force "$DISK"
 
 # partition the disk
 parted --script "$DISK" mklabel gpt
