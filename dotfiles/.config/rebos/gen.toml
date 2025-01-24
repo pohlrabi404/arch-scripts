@@ -1,0 +1,23 @@
+# --------------------- #
+#    Generation File    #
+# --------------------- #
+
+imports = [
+  "system",
+  "apps",
+]
+
+# Packages to be installed via the native package manager.
+[managers.system]
+items = [
+]
+
+# Packages to be installed via Flatpak.
+[managers.flatpak]
+items = [
+]
+
+# Packages to be installed via Cargo.
+[managers.cargo]
+items = [
+]
