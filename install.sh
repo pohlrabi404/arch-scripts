@@ -4,6 +4,7 @@ set -e
 echo "Installation starting..."
 timedatectl
 DISK="/dev/sda"
+PART=""
 
 umount -R /mnt 2>/dev/null || true
 swapoff "${DISK}${PART}2" 2>/dev/null || true
