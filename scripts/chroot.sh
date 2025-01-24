@@ -74,3 +74,5 @@ mv post-install.sh /home/pohlrabi/post-install.sh
 
 # Security
 sudo echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login
+
+rm chroot.sh
