@@ -21,7 +21,7 @@ cd ..
 
 rm -r cachyos-repo
 rm cachyos-repo.tar.xz
-pacman -Syu
+pacman -Syu --noconfirm
 
 cat <<EOF > /etc/hosts
 127.0.0.1               localhost
@@ -75,27 +75,8 @@ sudo echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-lo
 
 # download post install script
 curl -O https://raw.githubusercontent.com/pohlrabi404/arch-scripts/refs/heads/main/scripts/post-install.sh
+chmod +x post-install.sh
 mv post-install.sh /home/pohlrabi/post-install.sh
-
-# auto service for post-install
-loginctl enable-linger pohlrabi
-mkdir -p /home/pohlrabi/.config/systemd/user
-chmod +x /home/pohlrabi/post-install.sh
-chown -R pohlrabi:pohlrabi /home/pohlrabi
-cat <<EOF > /home/pohlrabi/.config/systemd/user/post-install.service
-[Unit]
-Description=Connect to Wifi after user login
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=%h/post_install.sh
-
-[Install]
-WantedBy=default.target
-EOF
-
-sudo -u pohlrabi systemctl --user enable /home/pohlrabi/.config/systemd/user/post-install.service
 
 rm chroot.sh
 bootctl status
