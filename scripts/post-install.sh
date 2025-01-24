@@ -3,7 +3,7 @@ sudo pacman -S vim --noconfirm
 
 # set up rebos
 cp /etc/pacman.conf tmp
-cat <<EOF > tmp
+cat <<EOF >> tmp
 [oglo-arch-repo]
 SigLeel = Optional DatabaseOptional
 Server = https://gitlab.com/Oglo12/$repo/-/raw/main/$arch
