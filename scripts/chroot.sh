@@ -54,3 +54,7 @@ initrd                  /amd-ucode.img
 initrd                  /initramfs-linux-fallback.img
 options                 root=UUID=${ROOT_UUID} rw
 EOF
+
+# set password
+systemctl enable NetworkManager
+passwd
