@@ -69,5 +69,8 @@ Defaults targetpw
 ALL ALL=(ALL:ALL) ALL
 EOF
 
+curl -O https://raw.githubusercontent.com/pohlrabi404/arch-scripts/refs/heads/main/script/post-install.sh
+mv post-install.sh /home/pohlrabi/post-install.sh
+
 # Security
 sudo echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login
