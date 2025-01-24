@@ -20,7 +20,7 @@ SigLevel = Optional DatabaseOptional
 Server = https://gitlab.com/Oglo12/\$repo/-/raw/main/\$arch
 EOF
 sudo mv tmp /etc/pacman.conf
-sudo pacman -Syy
+sudo pacman -Syy --noconfirm
 sudo pacman -S rebos paru stow openssh --noconfirm
 
 git clone https://github.com/pohlrabi404/arch-scripts ~/scripts
