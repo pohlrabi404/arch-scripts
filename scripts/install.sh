@@ -29,7 +29,7 @@ mkfs.ext4 -F "${DISK}${PART}3"
 mount "${DISK}${PART}3" /mnt
 mount --mkdir "${DISK}${PART}1" /mnt/boot
 
-pacstrap -K tar
+pacstrap -K /mnt tar
 
 # generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
