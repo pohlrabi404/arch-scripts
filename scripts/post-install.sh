@@ -2,9 +2,9 @@
 set -e
 
 # set up network
-SSID=$(cat /ssid)
+SSID=$(sudo cat /ssid)
 PSK_FILE="/$SSID.psk"
-PASSWORD=$(grep 'Passphrase=' "$PSK_FILE" | cut -d= -f2) 
+PASSWORD=$(sudo grep 'Passphrase=' "$PSK_FILE" | cut -d= -f2) 
 until nmcli -t -f STATE general | grep -q "connected"; do
 	sleep 2
 done
@@ -16,7 +16,7 @@ sudo pacman -S vim --noconfirm
 cp /etc/pacman.conf tmp
 cat <<EOF >> tmp
 [oglo-arch-repo]
-SigLeel = Optional DatabaseOptional
+SigLevel = Optional DatabaseOptional
 Server = https://gitlab.com/Oglo12/\$repo/-/raw/main/\$arch
 EOF
 sudo mv tmp /etc/pacman.conf
