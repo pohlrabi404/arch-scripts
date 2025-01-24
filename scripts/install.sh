@@ -34,9 +34,12 @@ pacstrap -K /mnt base linux linux-firmware networkmanager amd-ucode sudo
 # generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
+curl -O https+//raw.githubusercontent.com/pohlrabi404/arch-scripts/refs/heads/main/scripts/chroot.sh
 cp ./chroot.sh /mnt/chroot.sh
 chmod +x /mnt/chroot.sh
 arch-chroot /mnt ./chroot.sh
 
 umount -R /mnt
 echo "Instalation complete."
+rm chroot.sh
+rm install.sh
