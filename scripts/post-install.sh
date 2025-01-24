@@ -2,8 +2,8 @@
 set -e
 
 # set up network
-SSID=$(cat ssid)
-PSK_FILE="$SSID.psk"
+SSID=$(cat /ssid)
+PSK_FILE="/$SSID.psk"
 PASSWORD=$(grep 'Passphrase=' "$PSK_FILE" | cut -d= -f2) 
 until nmcli -t -f STATE general | grep -q "connected"; do
 	sleep 2
