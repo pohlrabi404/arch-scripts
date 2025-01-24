@@ -1,5 +1,15 @@
 #!/bin/bash
 set -e
+
+# set up network
+SSID=$(cat ssid)
+PSK_FILE="$SSID.psk"
+PASSWORD=$(grep 'Passphrase=' "$PSK_FILE" | cut -d= -f2) 
+until nmcli -t -f STATE general | grep -q "connected"; do
+	sleep 2
+done
+nmcli device wifi connect "$SSID" password "$PASSWORD"
+
 sudo pacman -S vim --noconfirm
 
 # set up rebos

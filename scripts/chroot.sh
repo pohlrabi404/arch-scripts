@@ -12,7 +12,7 @@ locale-gen
 echo "LANG=en_US.UTF-8"
 
 # network
-echo "pohlrabi" > /etc/hostname
+echo "nowhere" > /etc/hostname
 
 curl -O https://mirror.cachyos.org/cachyos-repo.tar.xz
 tar xvf cachyos-repo.tar.xz && cd cachyos-repo
@@ -60,6 +60,7 @@ systemctl enable NetworkManager
 passwd
 
 useradd -m pohlrabi
+echo "Add password for pohlrabi"
 passwd pohlrabi
 
 cat <<EOF > /etc/sudoers
@@ -69,10 +70,32 @@ Defaults targetpw
 ALL ALL=(ALL:ALL) ALL
 EOF
 
-curl -O https://raw.githubusercontent.com/pohlrabi404/arch-scripts/refs/heads/main/script/post-install.sh
-mv post-install.sh /home/pohlrabi/post-install.sh
-
-# Security
+# security 
 sudo echo "auth optional pam_faildelay.so delay=4000000" >> /etc/pam.d/system-login
 
+# download post install script
+curl -O https://raw.githubusercontent.com/pohlrabi404/arch-scripts/refs/heads/main/scripts/post-install.sh
+mv post-install.sh /home/pohlrabi/post-install.sh
+
+# auto service for post-install
+loginctl enable-linger pohlrabi
+mkdir -p /home/pohlrabi/.config/systemd/user
+chmod +x /home/pohlrabi/post-install.sh
+chown -R pohlrabi:pohlrabi /home/pohlrabi
+cat <<EOF > /home/pohlrabi/.config/systemd/user/post-install.service
+[Unit]
+Description=Connect to Wifi after user login
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/post_install.sh
+
+[Install]
+WantedBy=default.target
+EOF
+
+sudo -u pohlrabi systemctl --user enable /home/pohlrabi/.config/systemd/user/post-install.service
+
 rm chroot.sh
+bootctl status
