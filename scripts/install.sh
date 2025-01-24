@@ -41,5 +41,4 @@ arch-chroot /mnt ./chroot.sh
 
 umount -R /mnt
 echo "Instalation complete."
-rm chroot.sh
 rm install.sh
