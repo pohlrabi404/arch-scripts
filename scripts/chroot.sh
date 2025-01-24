@@ -17,6 +17,7 @@ echo "pohlrabi" > /etc/hostname
 curl -O https://mirror.cachyos.org/cachyos-repo.tar.xz
 tar xvf cachyos-repo.tar.xz && cd cachyos-repo
 ./cachyos-repo.sh
+cd ..
 
 rm -r cachyos-repo
 rm cachyos-repo.tar.xz
